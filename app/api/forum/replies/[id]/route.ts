@@ -1,9 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { deleteForumReply } from "../../../../../lib/database"
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  context: { params: { id: string } }
+) {
   try {
-    const replyId = Number.parseInt(params.id)
+    const replyId = Number.parseInt(context.params.id)
 
     if (isNaN(replyId)) {
       return NextResponse.json({ error: "Invalid reply ID" }, { status: 400 })
